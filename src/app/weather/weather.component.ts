@@ -5,17 +5,19 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { RouterModule } from '@angular/router';
 import { WeatherResponse } from '../model/weather-response';
 import { error } from 'console';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.css'
 })
 export class WeatherComponent {
 
-  city: string;
+  city: string = "";
+  iconUrl: string = "";
   weatherResponse: WeatherResponse;
   weatherForm: FormGroup;
   cityFormControl = new FormControl('', Validators.required);
@@ -25,16 +27,29 @@ export class WeatherComponent {
     this.weatherForm = new FormGroup ({
       city: this.cityFormControl
     })
+
+    this.getWeather();
   }
+
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
+  
 
   getWeather() {
 
     const formValues = this.weatherForm.getRawValue();
-    this.city = formValues.city;
-
+    if(formValues.city == "") {
+      this.city = "Madrid"
+    } else {
+      this.city = this.capitalizeFirstLetter(formValues.city);
+    }
 
     this.weatherService.getWeather(this.city).subscribe({
       next: (data) => {this.weatherResponse = data;
+        this.weatherResponse.details = this.capitalizeFirstLetter(this.weatherResponse.details.toString())
+        this.iconUrl = `https://openweathermap.org/img/wn/${this.weatherResponse.icon}@2x.png`;
         console.log(this.weatherResponse);
         this.weatherForm.get('city')?.reset();
         
@@ -42,5 +57,7 @@ export class WeatherComponent {
       error: (error:any) => console.log(error)
     })
   }
+
+
 
 }

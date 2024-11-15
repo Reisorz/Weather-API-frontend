@@ -11,7 +11,7 @@ mat-card{
     border: none;
     border-radius: 30px;
     width: 500px;
-    height: 420px;
+    height: 430px;
     padding: 50px 20px 50px 20px;
 }
 
@@ -68,3 +68,31 @@ mat-card{
     color: whitesmoke;
     margin-top: 40px;
 }
+
+.temperature {
+    font-size: 2.5rem;
+    margin: 40px 0px;
+}
+
+.weather-details{
+    display: flex;
+    align-items: center;
+}
+
+.weather {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.details {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.icon {
+    margin-left: 170px;
+    width: 100px;
+    height: 100px;
+}
+
+

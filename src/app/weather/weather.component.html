@@ -10,6 +10,17 @@
             <div class="weather-results">
 
                 <h3>Weather in {{city}}</h3>
+                <div class="temperature">{{(weatherResponse.temp - 273.15) | number :'1.2-2'}}ºC</div>
+                <div class="weather-details">
+                    <div>
+                        <div class="weather">{{weatherResponse.weather}}</div>
+                        <div class="details">{{weatherResponse.details}}</div>
+                        <div class="humidity">Humidity: {{weatherResponse.humidity}}%</div>
+                    </div>
+                    <img [src]="iconUrl" alt="Weather Icon" class="icon">
+                </div>
+                
+                
 
             </div>
         </mat-card-content>

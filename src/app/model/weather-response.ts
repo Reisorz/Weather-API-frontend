@@ -3,4 +3,5 @@ export class WeatherResponse {
     details: String;
     temp: number;
     humidity: number;
+    icon: String;
 }
