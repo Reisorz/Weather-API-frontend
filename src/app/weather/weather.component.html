@@ -1,12 +1,17 @@
 <div class="principal-container">
     <mat-card appearance="outlined">
         <mat-card-content>
-            <form class="example-form">
+            <form class="example-form" [formGroup]="weatherForm" (ngSubmit)="getWeather()">
                 <div class="search-div">
-                    <input class="search-input" matInput type="text" placeholder="Search city">
+                    <input class="search-input" matInput type="text" placeholder="Search city" formControlName="city">
                     <button class="search-button" mat-icon-button aria-label="Example icon button with a vertical three dot icon"><span class="material-symbols-outlined">search</span></button>
                 </div>
             </form>
+            <div class="weather-results">
+
+                <h3>Weather in {{city}}</h3>
+
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
